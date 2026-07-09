@@ -64,11 +64,10 @@ const projectSchema = new mongoose.Schema(
 );
 
 // Create slug from title
-projectSchema.pre("save", function (next) {
+projectSchema.pre("save", function () {
   if (this.isModified("title")) {
     this.slug = slugify(this.title, { lower: true, strict: true });
   }
-  next();
 });
 
 export default mongoose.model("Project", projectSchema);

@@ -56,11 +56,15 @@ app.get("/api/health", (req, res) => {
 
 import authRoutes from "./routes/authRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
+import productRoutes from "./routes/productRoutes.js";
+import projectRoutes from "./routes/projectRoutes.js";
 import { errorHandler } from "./middleware/errorMiddleware.js";
 
 // Mount routers
 app.use("/api/auth", authRoutes);
 app.use("/api/services", serviceRoutes);
+app.use("/api/products", productRoutes);
+app.use("/api/projects", projectRoutes);
 
 // Generic 404 handler
 app.use((req, res, next) => {

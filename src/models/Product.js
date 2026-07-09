@@ -69,11 +69,10 @@ const productSchema = new mongoose.Schema(
 );
 
 // Create slug from title
-productSchema.pre("save", function (next) {
+productSchema.pre("save", function () {
   if (this.isModified("title")) {
     this.slug = slugify(this.title, { lower: true, strict: true });
   }
-  next();
 });
 
 export default mongoose.model("Product", productSchema);
