@@ -14,14 +14,24 @@ const app = express();
 connectDB();
 
 // Global Middleware
-app.use(helmet()); // Security headers
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  "https://albabella-frontend.vercel.app",
+  "http://localhost:5173",
+].filter(Boolean);
+
+// CORS must come before helmet
 app.use(
   cors({
-    // origin: process.env.CLIENT_URL || "http://localhost:5173",
-    origin: process.env.CLIENT_URL || "https://albabella-frontend.vercel.app",
+    origin: allowedOrigins,
     credentials: true,
   })
 );
+
+// Handle preflight requests explicitly
+app.options("*", cors({ origin: allowedOrigins, credentials: true }));
+
+app.use(helmet()); // Security headers
 app.use(express.json()); // Parse JSON bodies
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
