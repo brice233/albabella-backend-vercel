@@ -17,7 +17,8 @@ connectDB();
 app.use(helmet()); // Security headers
 app.use(
   cors({
-    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    // origin: process.env.CLIENT_URL || "http://localhost:5173",
+    origin: process.env.CLIENT_URL || "https://albabella-frontend.vercel.app",
     credentials: true,
   })
 );
