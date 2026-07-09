@@ -28,8 +28,8 @@ app.use(
   })
 );
 
-// Handle preflight requests explicitly
-app.options("*", cors({ origin: allowedOrigins, credentials: true }));
+// Handle preflight requests explicitly (Express 5 syntax)
+app.options("/{*path}", cors({ origin: allowedOrigins, credentials: true }));
 
 app.use(helmet()); // Security headers
 app.use(express.json()); // Parse JSON bodies
