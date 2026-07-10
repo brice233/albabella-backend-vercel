@@ -17,10 +17,7 @@ router
 
 router
   .route("/:idOrSlug")
-  .get(getService);
-
-router
-  .route("/:id")
+  .get(getService)
   .put(protect, authorize("superadmin", "admin", "editor"), updateService)
   .delete(protect, authorize("superadmin", "admin"), deleteService);
 

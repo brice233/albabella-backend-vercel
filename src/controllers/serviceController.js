@@ -55,13 +55,13 @@ export const createService = asyncHandler(async (req, res, next) => {
 // @route   PUT /api/services/:id
 // @access  Private/Admin
 export const updateService = asyncHandler(async (req, res, next) => {
-  let service = await Service.findById(req.params.id);
+  let service = await Service.findById(req.params.idOrSlug);
 
   if (!service) {
     return res.status(404).json({ success: false, message: "Service not found" });
   }
 
-  service = await Service.findByIdAndUpdate(req.params.id, req.body, {
+  service = await Service.findByIdAndUpdate(req.params.idOrSlug, req.body, {
     new: true,
     runValidators: true,
   });
@@ -76,7 +76,7 @@ export const updateService = asyncHandler(async (req, res, next) => {
 // @route   DELETE /api/services/:id
 // @access  Private/Admin
 export const deleteService = asyncHandler(async (req, res, next) => {
-  const service = await Service.findById(req.params.id);
+  const service = await Service.findById(req.params.idOrSlug);
 
   if (!service) {
     return res.status(404).json({ success: false, message: "Service not found" });

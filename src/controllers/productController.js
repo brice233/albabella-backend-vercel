@@ -54,13 +54,13 @@ export const createProduct = asyncHandler(async (req, res, next) => {
 // @route   PUT /api/products/:id
 // @access  Private/Admin
 export const updateProduct = asyncHandler(async (req, res, next) => {
-  let product = await Product.findById(req.params.id);
+  let product = await Product.findById(req.params.idOrSlug);
 
   if (!product) {
     return res.status(404).json({ success: false, message: "Product not found" });
   }
 
-  product = await Product.findByIdAndUpdate(req.params.id, req.body, {
+  product = await Product.findByIdAndUpdate(req.params.idOrSlug, req.body, {
     new: true,
     runValidators: true,
   });
@@ -75,7 +75,7 @@ export const updateProduct = asyncHandler(async (req, res, next) => {
 // @route   DELETE /api/products/:id
 // @access  Private/Admin
 export const deleteProduct = asyncHandler(async (req, res, next) => {
-  const product = await Product.findById(req.params.id);
+  const product = await Product.findById(req.params.idOrSlug);
 
   if (!product) {
     return res.status(404).json({ success: false, message: "Product not found" });

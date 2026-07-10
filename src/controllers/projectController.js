@@ -54,13 +54,13 @@ export const createProject = asyncHandler(async (req, res, next) => {
 // @route   PUT /api/projects/:id
 // @access  Private/Admin
 export const updateProject = asyncHandler(async (req, res, next) => {
-  let project = await Project.findById(req.params.id);
+  let project = await Project.findById(req.params.idOrSlug);
 
   if (!project) {
     return res.status(404).json({ success: false, message: "Project not found" });
   }
 
-  project = await Project.findByIdAndUpdate(req.params.id, req.body, {
+  project = await Project.findByIdAndUpdate(req.params.idOrSlug, req.body, {
     new: true,
     runValidators: true,
   });
@@ -75,7 +75,7 @@ export const updateProject = asyncHandler(async (req, res, next) => {
 // @route   DELETE /api/projects/:id
 // @access  Private/Admin
 export const deleteProject = asyncHandler(async (req, res, next) => {
-  const project = await Project.findById(req.params.id);
+  const project = await Project.findById(req.params.idOrSlug);
 
   if (!project) {
     return res.status(404).json({ success: false, message: "Project not found" });
