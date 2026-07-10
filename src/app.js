@@ -58,6 +58,7 @@ import authRoutes from "./routes/authRoutes.js";
 import serviceRoutes from "./routes/serviceRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import projectRoutes from "./routes/projectRoutes.js";
+import settingsRoutes from "./routes/settingsRoutes.js";
 import { errorHandler } from "./middleware/errorMiddleware.js";
 
 // Mount routers
@@ -65,6 +66,7 @@ app.use("/api/auth", authRoutes);
 app.use("/api/services", serviceRoutes);
 app.use("/api/products", productRoutes);
 app.use("/api/projects", projectRoutes);
+app.use("/api/settings", settingsRoutes);
 
 // Generic 404 handler
 app.use((req, res, next) => {
